@@ -85,6 +85,12 @@ const PersonForm  = (props) => {
               setErrorMessage(null)
             }, 5000);
           })
+          .catch(error => {
+            setErrorMessage({message: error.response.data.error, error: true})
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000);
+          })
       return
     }
     if ( persons.find(({number}) => number === newPerson.number)) {
@@ -99,6 +105,11 @@ const PersonForm  = (props) => {
           setPersons(persons.concat(returnedPerson))
           setNewPerson({name: '', number:''})
           setErrorMessage({message: `Added ${returnedPerson.name}`, error: false})
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000);
+        }).catch(error => {
+          setErrorMessage({message: error.response.data.error, error: true})
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000);

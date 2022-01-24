@@ -21,4 +21,4 @@ const del = (id) => {
     return request.then(response => response.data)
 }
 
-export default { getAll, create, update, del}
+export default { getAll, create, update, del }
