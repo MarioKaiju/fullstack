@@ -2,14 +2,17 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
-import { useApolloClient } from '@apollo/client'
+import { useApolloClient, useQuery } from '@apollo/client'
 
 import { useEffect, useState } from 'react'  
 import Recommendations from './components/Recommendations'
+import { ME } from './queries'
 
 const App = () => {
+  const result = useQuery(ME)
   const [page, setPage] = useState('authors')
   const [token, setToken] = useState(null)
+  const [user, setUser] = useState(null)
   const client = useApolloClient()
 
   const logout = () => {
@@ -22,7 +25,11 @@ const App = () => {
     if ( localStorage.getItem('library-user-token') ) {
       setToken(localStorage.getItem('library-user-token'))
     }
-  }, [])
+
+    if (result.data) {
+      setUser(result.data.me)
+    }
+  }, [result.data])
 
   return (
     <div>
@@ -47,7 +54,12 @@ const App = () => {
 
       <NewBook show={page === 'add'} />
 
-      <Recommendations show={page === 'recommend'} />
+      {
+        user ? 
+          <Recommendations show={page === 'recommend'} user={user} />
+        :
+          null
+      }
 
       <LoginForm show={page === 'login'} setToken={setToken} setPage={setPage} />
     </div>
