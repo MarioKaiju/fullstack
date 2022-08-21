@@ -1,0 +1,25 @@
+{
+  "name": "healthCalculators",
+  "version": "1.0.0",
+  "description": "Calculate bmi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "calculateBmi": "ts-node bmicalculator.ts",
+    "calculateExercises": "ts-node exerciseCalculator.ts",
+    "start": "ts-node index.ts",
+    "dev": "ts-node-dev index.ts",
+    "lint": "eslint --ext .ts .",
+    "fix": "eslint --ext .ts . --fix"
+  },
+  "author": "Mario Alberto Vázquez Anaya",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.7.6",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
